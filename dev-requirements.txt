@@ -1,0 +1,6 @@
+tox
+
+hypothesis
+pytest
+pytest-asyncio
+pytest-trio
