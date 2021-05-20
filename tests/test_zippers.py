@@ -30,7 +30,7 @@ async def test_def_zipping_longest_fillvalue_counts(anyio_backend):
         azip_longest,
         arange(base_len),
         arange(base_len + 2),
-        arange(base_len + 3),
+        arange(base_len + 5),
         fillvalue=None,
     )
 
