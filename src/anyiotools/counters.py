@@ -1,5 +1,14 @@
 import itertools
-from typing import AsyncIterator, TypeVar, Union
+from typing import AsyncGenerator, Callable, Tuple, TypeVar, Union
+
+from anyiotools.utils import aiter_
+
+__all__ = (
+    "acount",
+    "aenumerate",
+    "arange",
+)
+
 
 T = TypeVar("T")
 
@@ -7,12 +16,8 @@ T = TypeVar("T")
 #   `decimal.Decimal` (as an example), so maybe expand later
 Number = Union[int, float]
 
-
-async def acount(start: Number = 0, step: Number = 1) -> AsyncIterator[Number]:
-    for i in itertools.count(start, step):
-        yield i
-
-
-async def arange(*args: int) -> AsyncIterator[int]:
-    for i in range(*args):
-        yield i
+acount: Callable[[Number, Number], AsyncGenerator[Number, None]] = aiter_(
+    itertools.count
+)
+aenumerate: Callable[[T, int], AsyncGenerator[Tuple[int, T], None]] = aiter_(enumerate)
+arange: Callable[..., AsyncGenerator[int, None]] = aiter_(range)
